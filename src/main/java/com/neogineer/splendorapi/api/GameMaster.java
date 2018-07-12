@@ -14,7 +14,7 @@ public class GameMaster {
 
     private Map<String, Player> mPlayers = new HashMap<>();
     private Map<String, PlayerState> mPlayerStates = new HashMap<>();
-    private GameTable mGameTable = new GameTable();
+    private GameTable mGameTable;
 
     /**
      * should be called at the very beginning to register players.
@@ -40,8 +40,13 @@ public class GameMaster {
     }
 
     public void start(){
+        initializeGame();
         introducePlayersToEachOther();
 
+    }
+
+    private void initializeGame() {
+        mGameTable = new GameTable(mPlayers.size());
     }
 
     private void introducePlayersToEachOther() {
