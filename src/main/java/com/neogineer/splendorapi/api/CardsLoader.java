@@ -7,6 +7,7 @@ import com.neogineer.splendorapi.api.data.TokensArray;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +54,7 @@ class CardsLoader {
                 continue;
             cards.add(parseCard(line, scanner.nextLine()));
         }
-
+        Collections.shuffle(cards);
         return cards;
     }
 

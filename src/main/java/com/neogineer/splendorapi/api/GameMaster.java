@@ -39,7 +39,7 @@ public class GameMaster {
                 mPlayerStates.get(player.playerName)));
     }
 
-    public void start(){
+    synchronized public void start(){
         initializeGame();
         introducePlayersToEachOther();
 
@@ -47,14 +47,20 @@ public class GameMaster {
 
     private void initializeGame() {
         mGameTable = new GameTable(mPlayers.size());
+        System.out.println("** GAME TABLE CREATED **\n"+mGameTable.toString());
     }
 
     private void introducePlayersToEachOther() {
+        System.out.println("\n** INTRODUCING PLAYERS TO EACH OTHER **");
         for(Player player: mPlayers.values()){
+            System.out.print("I'am "+player.playerName+" and I'm happy to play against: ");
             for(PlayerState opponent: mPlayerStates.values()){
-                if(!opponent.playerName.equals(player.playerName))
+                if(!opponent.playerName.equals(player.playerName)){
                     player.introduceOpponent(new ReadOnlyPlayerState(opponent));
+                    System.out.print(opponent.playerName+" ");
+                }
             }
+            System.out.println();
         }
     }
 }

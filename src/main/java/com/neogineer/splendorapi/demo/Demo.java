@@ -31,9 +31,10 @@ class Achraf extends Player {
         super(playerName);
     }
 
+    int mCount=0;
     @Override
     public void yourTurn() {
-
+        System.out.println("I'm Achraf and I play my turn N°"+mCount++);
     }
 
     @Override
@@ -53,9 +54,10 @@ class Kevin extends Player {
         super(playerName);
     }
 
+    int mCount=0;
     @Override
     public void yourTurn() {
-
+        System.out.println("I'm Kévin and I play my turn N°"+mCount++);
     }
 
     @Override
