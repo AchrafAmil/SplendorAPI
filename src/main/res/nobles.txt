@@ -1,0 +1,20 @@
+# file format:
+# this is a custom minimalist format with custom parser
+# each two lines is a noble that follows the pattern:
+# nobleId points
+# red_cost green_cost blue_cost black_cost white_cost
+
+1 3
+0 4 0 0 4
+
+2 3
+0 3 0 3 3
+
+3 3
+1 4 0 4 0
+
+4 3
+4 0 4 0 0
+
+5 3
+3 3 3 0 0

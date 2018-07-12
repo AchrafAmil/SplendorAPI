@@ -12,4 +12,10 @@ public class Noble {
         this.points = points;
         this.cost = cost;
     }
+
+    @Override
+    public String toString() {
+        return "points:"+points+" id:"+nobleId
+                +"\ncost: "+cost.toString();
+    }
 }

@@ -1,0 +1,18 @@
+# file format:
+# this is a custom minimalist format with custom parser
+# each two lines is a card that follows the pattern:
+# cardId COLOR points
+# red_cost green_cost blue_cost black_cost white_cost
+
+100 BLUE 3
+2 2 0 2 3
+
+101 GREEN 1
+0 0 2 2 2
+
+102 RED 2
+0 4 0 0 0
+
+103 BLACK 2
+0 2 0 3 2
+

@@ -14,7 +14,7 @@ public class GameMaster {
 
     private Map<String, Player> mPlayers = new HashMap<>();
     private Map<String, PlayerState> mPlayerStates = new HashMap<>();
-    private GameTable mGameTable = new GameTable();
+    private GameTable mGameTable;
 
     /**
      * should be called at the very beginning to register players.
@@ -39,17 +39,28 @@ public class GameMaster {
                 mPlayerStates.get(player.playerName)));
     }
 
-    public void start(){
+    synchronized public void start(){
+        initializeGame();
         introducePlayersToEachOther();
 
     }
 
+    private void initializeGame() {
+        mGameTable = new GameTable(mPlayers.size());
+        System.out.println("** GAME TABLE CREATED **\n"+mGameTable.toString());
+    }
+
     private void introducePlayersToEachOther() {
+        System.out.println("\n** INTRODUCING PLAYERS TO EACH OTHER **");
         for(Player player: mPlayers.values()){
+            System.out.print("I'am "+player.playerName+" and I'm happy to play against: ");
             for(PlayerState opponent: mPlayerStates.values()){
-                if(!opponent.playerName.equals(player.playerName))
+                if(!opponent.playerName.equals(player.playerName)){
                     player.introduceOpponent(new ReadOnlyPlayerState(opponent));
+                    System.out.print(opponent.playerName+" ");
+                }
             }
+            System.out.println();
         }
     }
 }
