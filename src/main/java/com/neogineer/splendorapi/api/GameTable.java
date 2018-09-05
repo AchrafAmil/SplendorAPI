@@ -82,6 +82,12 @@ class GameTable {
         mNobles.add(noble);
     }
 
+    public boolean contains(Card card){
+        return mCards[0].contains(card)
+                || mCards[1].contains(card)
+                || mCards[2].contains(card);
+    }
+
     @Override
     public String toString() {
         StringBuilder description = new StringBuilder();

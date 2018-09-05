@@ -3,6 +3,14 @@ package com.neogineer.splendorapi.api.data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Associates an int to each of colors specified at {@link Color}.
+ * Use {@link this#getCount(Color)} to get the int for each color.
+ *
+ * This can be used to represent the number of tokens
+ * or the number of cards (by color) a player has, or to represent the
+ * cost of a card or a noble.
+ */
 public class TokensArray {
 
     // was an Array, now it's a Map, but things are abstract enough that it doesn't matter :-)
@@ -54,6 +62,56 @@ public class TokensArray {
         for(Color color: Color.values()){
             result += color.name()+":"+mTokens.get(color)+" ";
         }
+        return result;
+    }
+
+    public TokensArray difference(TokensArray other){
+        TokensArray result = new TokensArray();
+        for(Color color: Color.values()){
+            int value = this.getCount(color)-other.getCount(color);
+            result.mTokens.put(color, value);
+        }
+        return result;
+    }
+
+    public boolean isPositive(){
+        for(Color color: Color.values()){
+            if(this.getCount(color)<0)
+                return false;
+        }
+        return true;
+    }
+
+    public boolean isZero(){
+        for(Integer i : mTokens.values())
+            if(i!=0)
+                return false;
+        return true;
+    }
+
+    public int getSum(){
+        int result = 0;
+        for(int i: mTokens.values())
+            result += i;
+        return result;
+    }
+
+    public TokensArray plus(TokensArray other){
+        TokensArray result = new TokensArray();
+        for(Color color: Color.values())
+            result.mTokens.put(color, getCount(color)+other.getCount(color));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        TokensArray other = (TokensArray) obj;
+        return this.difference(other).isZero();
+    }
+
+    public TokensArray copy(){
+        TokensArray result = new TokensArray();
+        result.mTokens.putAll(mTokens);
         return result;
     }
 }

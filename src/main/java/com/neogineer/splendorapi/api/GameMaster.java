@@ -1,5 +1,10 @@
 package com.neogineer.splendorapi.api;
 
+import com.neogineer.splendorapi.api.data.BuyCardTransaction;
+import com.neogineer.splendorapi.api.data.TokensArray;
+import com.neogineer.splendorapi.api.data.Transaction;
+import com.neogineer.splendorapi.api.data.TransactionType;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +20,7 @@ public class GameMaster {
     private Map<String, Player> mPlayers = new HashMap<>();
     private Map<String, PlayerState> mPlayerStates = new HashMap<>();
     private GameTable mGameTable;
+    private String winner;
 
     /**
      * should be called at the very beginning to register players.
@@ -42,7 +48,13 @@ public class GameMaster {
     synchronized public void start(){
         initializeGame();
         introducePlayersToEachOther();
+        playingLoop();
+    }
 
+    private void playingLoop() {
+        for(Player player : mPlayers.values()){
+
+        }
     }
 
     private void initializeGame() {
@@ -61,6 +73,29 @@ public class GameMaster {
                 }
             }
             System.out.println();
+        }
+    }
+
+    private boolean execute(String playerName, Transaction transaction){
+        if(!checkFeasibility(playerName, transaction))
+            return false;
+
+        if(transaction.mType==TransactionType.BUY_CARD){
+            PlayerState player = mPlayerStates.get(playerName);
+            player.mCards
+        }
+
+        return true;
+    }
+
+    private boolean checkFeasibility(String playerName, Transaction transaction) {
+        PlayerState playerState = mPlayerStates.get(playerName);
+
+        if(transaction instanceof BuyCardTransaction){
+            BuyCardTransaction trans = (BuyCardTransaction) transaction;
+            return trans.canBeIssuedBy(new ReadOnlyPlayerState(playerState))
+                    && mGameTable.contains(trans.mCardToBuy);
+
         }
     }
 }

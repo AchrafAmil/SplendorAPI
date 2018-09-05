@@ -18,4 +18,8 @@ public class PlayerState {
     public PlayerState(String playerName) {
         this.playerName = playerName;
     }
+
+    public TokensArray getCardsPlusTokens(){
+        return mTokens.plus(mCards);
+    }
 }
