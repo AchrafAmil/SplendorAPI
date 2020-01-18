@@ -3,6 +3,6 @@
 API to build AI players (bots) for the board game Splendor.
 
 
-## Under construction...
+## Replaced 
 
-This is to experiment different strategies. Once built, you will be able to fork and implement your own bots, making them play together...
+Abandoned in favour of the Kotlin version : https://github.com/AchrafAmil/splendor-api
